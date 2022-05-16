@@ -4,6 +4,7 @@ import AudioPlayer from './audio-player';
 import Button from './button';
 import MintIcon from '../assets/icons/mint-icon.svg';
 import RecordIcon from '../assets/icons/record-icon.svg';
+import BackgroundColorType from '../enums/background-color-type';
 
 const CreateDeemoCard = () => {
   const [audioURL, setAudioURL] = useState<string>('');
@@ -52,6 +53,7 @@ const CreateDeemoCard = () => {
           Icon={RecordIcon}
           label="Select Recording"
           onClick={onClickSelectRecordingButton}
+          backgroundColorType={BackgroundColorType.SECONDARY}
         />
         <input
           hidden
@@ -71,6 +73,7 @@ const CreateDeemoCard = () => {
           type={ButtonType.WHITE}
           isDisabled={!(title && audioURL)}
           onClick={onClickMintButton}
+          backgroundColorType={BackgroundColorType.SECONDARY}
         />
       </footer>
     </article>

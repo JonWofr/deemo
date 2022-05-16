@@ -5,6 +5,7 @@ import OpenSeaIcon from '../assets/icons/opensea-icon.svg';
 import ButtonType from '../enums/button-type';
 import AudioPlayer from './audio-player';
 import { abbreviateHash } from '../lib/deemos';
+import BackgroundColorType from '../enums/background-color-type';
 
 type Props = {
   deemo: Deemo;
@@ -33,7 +34,12 @@ const DeemoCard = ({ deemo }: Props) => {
       <hr className="border-t-muted my-6" />
       <footer className="flex justify-end">
         <a href={deemo.openSeaURL} target="_blank">
-          <Button Icon={OpenSeaIcon} label="OpenSea" type={ButtonType.WHITE} />
+          <Button
+            Icon={OpenSeaIcon}
+            label="OpenSea"
+            type={ButtonType.WHITE}
+            backgroundColorType={BackgroundColorType.SECONDARY}
+          />
         </a>
       </footer>
     </article>
