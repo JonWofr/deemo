@@ -24,7 +24,7 @@ const Button = ({
     <button
       className={classNames('rounded-full border', {
         'p-2': !label,
-        'px-4 py-2 flex items-center gap-2': label,
+        'px-4 py-2 flex items-center justify-center gap-2': label,
         'border-transparent  [background-clip:_padding-box,_border-box]':
           type === ButtonType.ACCENT,
         'bg-[linear-gradient(#353545,_#353545),_linear-gradient(#FF832B,_#FFC02B)]':

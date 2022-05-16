@@ -8,6 +8,7 @@ import BackgroundColorType from '../enums/background-color-type';
 
 const CreateDeemoCard = () => {
   const [audioURL, setAudioURL] = useState<string>('');
+  const [audioFile, setAudioFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -16,6 +17,8 @@ const CreateDeemoCard = () => {
     if (!files) return;
     const file = files[0];
     if (!file) return;
+    setAudioFile(file);
+
     const audioDataURL = await readFileAsDataURL(file);
     setAudioURL(audioDataURL);
   };
@@ -37,7 +40,10 @@ const CreateDeemoCard = () => {
     fileInput.click();
   };
 
-  const onClickMintButton = () => {};
+  const onClickMintButton = async () => {
+    if (!audioFile)
+      throw new Error('No audio file found which could be uploaded');
+  };
 
   return (
     <article className="py-8 px-3 bg-secondary rounded-xl w-full max-w-md mx-auto space-y-6">
