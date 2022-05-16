@@ -29,10 +29,8 @@ const DeemoCard = ({ deemo }: Props) => {
         </div>
         <time className="text-secondary">{parseDate(deemo.mintedAt)}</time>
       </header>
-      <div className="body">
-        <AudioPlayer audioURL={deemo.audioCID} />
-      </div>
-      <hr className="h-px bg-[rgb(99,99,130)] my-6" />
+      <AudioPlayer audioURL={deemo.audioCID} />
+      <hr className="border-t-muted my-6" />
       <footer className="flex justify-end">
         <a href={deemo.openSeaURL} target="_blank">
           <Button Icon={OpenSeaIcon} label="OpenSea" type={ButtonType.WHITE} />

@@ -7,9 +7,16 @@ type Props = {
   label?: string;
   type?: ButtonType;
   onClick?: () => void;
+  isDisabled?: boolean;
 };
 
-const Button = ({ Icon, label, type = ButtonType.ACCENT, onClick }: Props) => {
+const Button = ({
+  Icon,
+  label,
+  type = ButtonType.ACCENT,
+  onClick,
+  isDisabled = false,
+}: Props) => {
   return (
     <button
       className={classNames('rounded-full border', {
@@ -18,8 +25,10 @@ const Button = ({ Icon, label, type = ButtonType.ACCENT, onClick }: Props) => {
         'border-transparent bg-[linear-gradient(#353545,_#353545),_linear-gradient(#FF832B,_#FFC02B)] [background-clip:_padding-box,_border-box]':
           type === ButtonType.ACCENT,
         'border-primaryText': type === ButtonType.WHITE,
+        'opacity-50': isDisabled,
       })}
       onClick={onClick}
+      disabled={isDisabled}
     >
       <Icon></Icon>
       {label && (

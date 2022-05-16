@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         primaryText: '#FFFFFF',
+        muted: '#636382',
       },
       textColor: {
         primary: '#FFFFFF',

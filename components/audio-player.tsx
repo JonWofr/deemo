@@ -36,6 +36,8 @@ const AudioPlayer = ({ audioURL }: Props) => {
     }
 
     audioElement.addEventListener('timeupdate', () => {
+      if (!audioElement.duration) return;
+
       const progressInPercent = Math.floor(
         (audioElement.currentTime / audioElement.duration) * 100
       );
@@ -87,6 +89,7 @@ const AudioPlayer = ({ audioURL }: Props) => {
           <Button
             Icon={PlayIcon}
             onClick={() => changePlayState(AudioPlayState.RUNNING)}
+            isDisabled={!audioURL}
           />
         );
       case AudioPlayState.RUNNING:
@@ -94,6 +97,7 @@ const AudioPlayer = ({ audioURL }: Props) => {
           <Button
             Icon={PauseIcon}
             onClick={() => changePlayState(AudioPlayState.PAUSED)}
+            isDisabled={!audioURL}
           />
         );
     }
@@ -108,6 +112,7 @@ const AudioPlayer = ({ audioURL }: Props) => {
           progress={progressInPercent}
           onChange={onChangeAudioTrack}
           onMouseUp={onMouseUpAudioTrack}
+          isDisabled={!audioURL}
         />
       </div>
       <p className="w-12 text-center font-mono font-light text-xs text-secondary">

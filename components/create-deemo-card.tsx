@@ -1,40 +1,77 @@
-import Link from 'next/link';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ButtonType from '../enums/button-type';
-import { abbreviateHash } from '../lib/deemos';
 import AudioPlayer from './audio-player';
 import Button from './button';
-import OpenSeaIcon from '../assets/icons/opensea-icon.svg';
-import { deemos } from '../pages/deemos';
+import MintIcon from '../assets/icons/mint-icon.svg';
+import RecordIcon from '../assets/icons/record-icon.svg';
 
 const CreateDeemoCard = () => {
-  const parseDate = (mintedAt: number) => {
-    const date = new Date(mintedAt);
-    return date.toLocaleDateString();
+  const [audioURL, setAudioURL] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const onChangeFileInput = async (files: FileList | null) => {
+    if (!files) return;
+    const file = files[0];
+    if (!file) return;
+    const audioDataURL = await readFileAsDataURL(file);
+    setAudioURL(audioDataURL);
   };
-  const deemo = deemos[0];
+
+  const readFileAsDataURL = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', () => {
+        resolve(fileReader.result as string);
+      });
+      fileReader.addEventListener('error', reject);
+      fileReader.readAsDataURL(file);
+    });
+
+  const onClickSelectRecordingButton = () => {
+    const fileInput = fileInputRef.current;
+    if (!fileInput) return;
+
+    fileInput.click();
+  };
+
+  const onClickMintButton = () => {};
 
   return (
-    <article className="py-8 px-3 bg-secondary rounded-xl">
-      <header className="flex justify-between gap-4 mb-4">
-        <div className="flex flex-col">
-          <Link href={`/users/${deemo.owner}`}>
-            <a className="text-secondary text-xs underline">
-              {abbreviateHash(deemo.owner)}
-            </a>
-          </Link>
-          <h2 className="text-2xl text-primary">{deemo.title}</h2>
-        </div>
-        <time className="text-secondary">{parseDate(deemo.mintedAt)}</time>
-      </header>
-      <div className="body">
-        <AudioPlayer audioURL={deemo.audioCID} />
+    <article className="py-8 px-3 bg-secondary rounded-xl w-full max-w-md mx-auto space-y-6">
+      <input
+        type="text"
+        className="bg-transparent block w-full px-2 py-1 border-b border-b-muted text-secondary"
+        placeholder="Deemo title"
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
+      />
+      <div className="space-y-4">
+        <Button
+          Icon={RecordIcon}
+          label="Select Recording"
+          onClick={onClickSelectRecordingButton}
+        />
+        <input
+          hidden
+          ref={fileInputRef}
+          type="file"
+          accept="audio/*"
+          capture
+          onChange={(event) => onChangeFileInput(event.target.files)}
+        />
+        <AudioPlayer audioURL={audioURL} />
       </div>
-      <hr className="h-px bg-[rgb(99,99,130)] my-6" />
+      <hr className="border-t-muted" />
       <footer className="flex justify-end">
-        <a href={deemo.openSeaURL} target="_blank">
-          <Button Icon={OpenSeaIcon} label="OpenSea" type={ButtonType.WHITE} />
-        </a>
+        <Button
+          Icon={MintIcon}
+          label="Mint"
+          type={ButtonType.WHITE}
+          isDisabled={!(title && audioURL)}
+          onClick={onClickMintButton}
+        />
       </footer>
     </article>
   );

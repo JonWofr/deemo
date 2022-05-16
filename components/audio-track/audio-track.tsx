@@ -5,9 +5,15 @@ type Props = {
   progress: number;
   onChange: (progress: number) => void;
   onMouseUp: () => void;
+  isDisabled?: boolean;
 };
 
-const AudioTrack = ({ progress, onChange, onMouseUp }: Props) => {
+const AudioTrack = ({
+  progress,
+  onChange,
+  onMouseUp,
+  isDisabled = false,
+}: Props) => {
   return (
     <input
       type="range"
@@ -19,6 +25,7 @@ const AudioTrack = ({ progress, onChange, onMouseUp }: Props) => {
       style={{
         backgroundSize: `${progress}% 100%`,
       }}
+      disabled={isDisabled}
     />
   );
 };
