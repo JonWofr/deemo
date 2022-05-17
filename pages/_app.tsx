@@ -8,7 +8,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import Head from 'next/head';
 
-const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
+const alchemyApiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 
 const chains = defaultChains;
 const defaultChain = chain.mainnet;
@@ -18,9 +18,10 @@ const client = createClient({
   autoConnect: true,
   connectors({ chainId }) {
     const chain = chains.find((x) => x.id === chainId) ?? defaultChain;
-    const rpcUrl = chain.rpcUrls.alchemy
-      ? `${chain.rpcUrls.alchemy}/${alchemyId}`
-      : chain.rpcUrls.default;
+    const rpcUrl =
+      chain.rpcUrls.alchemy && alchemyApiKey
+        ? alchemyApiKey
+        : chain.rpcUrls.default;
     console.log(rpcUrl);
     return [
       new MetaMaskConnector({ chains }),
