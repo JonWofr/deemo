@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/nunito/Nunito-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/nunito/Nunito-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/nunito/Nunito-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/nunito/Nunito-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'SourceCodePro';
+  src: url('/fonts/source-code-pro/SourceCodePro-Light.ttf');
+  font-weight: 300;
+}
+
+body {
+  background-color: #1a1a22;
+}

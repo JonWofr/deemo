@@ -1,0 +1,87 @@
+// Code based on https://nikitahl.com/style-range-input-css
+
+.audioTrack {
+  display: block;
+  width: 100%;
+  appearance: none;
+  height: 0.25rem;
+  background-color: #d4d4de;
+  border-radius: 0.125rem;
+  background-image: linear-gradient(90deg, #ff832b, #ffc02b);
+  background-repeat: no-repeat;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  // Duplicate code is necessary because vendor-specific selectors can't be comma-seperated
+  &::-webkit-slider-thumb {
+    appearance: none;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 50%;
+    background-color: #ffc02b;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease-in-out;
+    border: none;
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 50%;
+    background-color: #ffc02b;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease-in-out;
+    border: none;
+  }
+
+  &::-ms-thumb {
+    appearance: none;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 50%;
+    background-color: #ffc02b;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease-in-out;
+    border: none;
+  }
+
+  &::-webkit-slider-thumb:hover:not(:disabled) {
+    background-color: hsl(42, 100%, 38%);
+    cursor: ew-resize;
+  }
+
+  &::-moz-range-thumb:hover:not(:disabled) {
+    background-color: hsl(42, 100%, 38%);
+    cursor: ew-resize;
+  }
+
+  &::-ms-thumb:hover:not(:disabled) {
+    background-color: hsl(42, 100%, 38%);
+    cursor: ew-resize;
+  }
+
+  /* Input Track */
+  &::-webkit-slider-runnable-track {
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  &::-moz-range-track {
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  &::-ms-track {
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+}
