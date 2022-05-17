@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed inset-x-0 shadow bg-secondary">
+    <header className="fixed inset-x-0 shadow bg-secondary z-10">
       <div className="container md:flex md:justify-between md:items-center">
         <div className="flex justify-between items-center py-3">
           <Link href="/">
