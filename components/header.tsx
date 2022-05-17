@@ -90,23 +90,6 @@ const Header = () => {
               </a>
             </Link>
           </li>
-          <li>
-            <Link href="/users/0x94aD4e4E11800B8df7f5c848367E0c40Decb699B">
-              <a
-                className={classNames(
-                  'uppercase text-secondary tracking-wider py-2 block text-center relative',
-                  {
-                    'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo':
-                      path ===
-                      '/users/0x94aD4e4E11800B8df7f5c848367E0c40Decb699B',
-                  }
-                )}
-                onClick={() => setIsExpanded(false)}
-              >
-                Profile
-              </a>
-            </Link>
-          </li>
         </ul>
       </div>
     </header>

@@ -1,31 +1,44 @@
 import Deemo from '../models/deemo';
-import Link from 'next/link';
 import Button from './button';
 import OpenSeaIcon from '../assets/icons/opensea-icon.svg';
 import ButtonType from '../enums/button-type';
 import AudioPlayer from './audio-player';
-import { abbreviateHash } from '../lib/deemos';
+import { abbreviateHash } from '../lib/helper-functions';
 import BackgroundColorType from '../enums/background-color-type';
+import useInViewOnce from '../lib/use-in-view-once';
+import classNames from 'classnames';
 
 type Props = {
   deemo: Deemo;
 };
 
 const DeemoCard = ({ deemo }: Props) => {
+  const [ref, isVisible] = useInViewOnce();
+
   const parseDate = (mintedAt: number) => {
     const date = new Date(mintedAt);
     return date.toLocaleDateString();
   };
 
   return (
-    <article className="py-8 px-3 bg-secondary rounded-xl">
+    <article
+      ref={ref}
+      className={classNames(
+        'py-8 px-3 bg-secondary rounded-xl opacity-0 transition-opacity duration-500',
+        {
+          'opacity-100': isVisible,
+        }
+      )}
+    >
       <header className="flex justify-between gap-4 mb-4">
         <div className="flex flex-col">
-          <Link href={`/users/${deemo.owner}`}>
-            <a className="text-secondary text-xs underline">
-              {abbreviateHash(deemo.owner)}
-            </a>
-          </Link>
+          <a
+            href={`https://testnets.opensea.io/${deemo.owner}`}
+            className="text-secondary text-xs underline"
+            target="_blank"
+          >
+            {abbreviateHash(deemo.owner)}
+          </a>
           <h2 className="text-2xl text-primary">{deemo.title}</h2>
         </div>
         <time className="text-secondary">{parseDate(deemo.mintedAt)}</time>

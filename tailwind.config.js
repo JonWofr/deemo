@@ -25,6 +25,35 @@ module.exports = {
         accentFrom: '#FF832B',
         accentTo: '#FFC02B',
       },
+      animation: {
+        'spin-slow': 'spin 2s linear infinite',
+        dash: 'dash 1.5s ease-in-out infinite',
+        color: 'color 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        dash: {
+          '0%': {
+            'stroke-dasharray': '1, 150',
+            'stroke-dashoffset': '0',
+          },
+          '50%': {
+            'stroke-dasharray': '90, 150',
+            'stroke-dashoffset': '-35',
+          },
+          '100%': {
+            'stroke-dasharray': '90, 150',
+            'stroke-dashoffset': '-124',
+          },
+        },
+        color: {
+          '0%': {
+            stroke: '#FF832B',
+          },
+          '100%': {
+            stroke: '#FFC02B',
+          },
+        },
+      },
     },
     container: {
       center: true,

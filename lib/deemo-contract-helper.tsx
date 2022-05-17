@@ -1,31 +1,63 @@
+import { ethers } from 'ethers';
 import Deemo from '../models/deemo';
 import NFTMetadata from '../models/nft-metadata';
 import IPFSHelper from './ipfs-helper';
 
-class DeemoContractHelper {
+export class DeemoContractHelper {
   private ipfsHelper = new IPFSHelper();
-  constructor() {}
+  private readonly GENESIS_BLOCK = 26339725;
 
-  //   public mintNFT = async (name: string, file: File): Promise<void> => {
-  //     const metadataURI = await this.parseMetadataURI(name, file);
-  //     console.log(`NFT metadata stored at: ${metadataURI}`);
+  constructor(private contract: ethers.Contract) {}
 
-  //     let nftTxn = await this.contract.makeNFT(metadataURI);
+  public mintNFT = async (name: string, audioFile: File): Promise<string> => {
+    const metadataURI = await this.parseMetadataURI(name, audioFile);
+    console.log(`NFT metadata stored at: ${metadataURI}`);
 
-  //     console.log('Minting...please wait.');
-  //     const txnReceipt = await nftTxn.wait();
+    let nftTxn = await this.contract.makeNFT(metadataURI);
 
-  //     console.log(
-  //       `Minted, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`
-  //     );
-  //   };
+    console.log('Minting...please wait.');
+    await nftTxn.wait();
+    return nftTxn.hash;
+  };
 
-  private parseMetadataURI = async (name: string, file: File) => {
-    const { cid } = await this.ipfsHelper.uploadFile(file);
+  public fetchAllDeemos = async () => {
+    const mintEventFilter = this.contract.filters.Transfer(
+      ethers.constants.AddressZero
+    );
+    const mintEvents = await this.contract.queryFilter(
+      mintEventFilter,
+      this.GENESIS_BLOCK
+    );
+    const deemos = await Promise.all(
+      mintEvents.map<Promise<Deemo>>(async (mintEvent) => {
+        const { tokenId } = mintEvent.args!;
+        const [owner, tokenURI, block] = await Promise.all([
+          this.contract.ownerOf(tokenId),
+          this.contract.tokenURI(tokenId),
+          mintEvent.getBlock(),
+        ]);
+        const { name, audioURL } = await this.resolveMetadataURI(tokenURI);
+        return {
+          tokenId: tokenId.toNumber(),
+          title: name,
+          owner,
+          audioCID: this.ipfsHelper.parseIPFSGatewayURL(
+            this.ipfsHelper.parseCid(audioURL)
+          ),
+          mintedAt: block.timestamp * 1000,
+          openSeaURL: `https://testnets.opensea.io/assets/mumbai/0xaf9884b0c98c9dc3f9fd495dd986a78adc61b904/${tokenId}`,
+        };
+      })
+    );
+    return deemos;
+  };
+
+  private parseMetadataURI = async (name: string, audioFile: File) => {
+    const { cid: avatarCid } = await this.ipfsHelper.uploadFile(audioFile);
 
     const metadata: NFTMetadata = {
       name,
-      animation_url: this.ipfsHelper.parseIPFSURL(cid.toString()),
+      animation_url: this.ipfsHelper.parseIPFSURL(avatarCid.toString()),
     };
 
     const metadataJSON = JSON.stringify(metadata);
@@ -36,46 +68,17 @@ class DeemoContractHelper {
     return metadataURI;
   };
 
-  //   public fetchAllArtimons = async () => {
-  //     const mintEventFilter = this.contract.filters.Transfer(
-  //       ethers.constants.AddressZero
-  //     );
-  //     const mintEvents = await this.contract.queryFilter(mintEventFilter);
-  //     const artimons = await Promise.all(
-  //       mintEvents.map<Promise<Artimon>>(async (mintEvent) => {
-  //         const { tokenId } = mintEvent.args!;
-  //         const [owner, tokenURI] = await Promise.all([
-  //           this.contract.ownerOf(tokenId),
-  //           this.contract.tokenURI(tokenId),
-  //         ]);
-  //         const artimon = await this.parseArtimon(tokenURI);
-  //         return {
-  //           ...artimon,
-  //           trainer: owner,
-  //           tokenId: tokenId.toNumber(),
-  //         };
-  //       })
-  //     );
-  //     return artimons;
-  //   };
-
-  private parseDeemo = async (metadataURI: string): Promise<Deemo> => {
+  private resolveMetadataURI = async (
+    metadataURI: string
+  ): Promise<{ name: string; audioURL: string }> => {
     const metadataBlob = await this.ipfsHelper.getFileData(
       this.ipfsHelper.parseCid(metadataURI)
     );
     const metadataJSON = await metadataBlob.text();
     const metadata: NFTMetadata = JSON.parse(metadataJSON);
     return {
-      tokenId: '',
-      title: metadata.name,
-      audioCID: this.ipfsHelper.parseIPFSGatewayURL(
-        this.ipfsHelper.parseCid(metadata.animation_url)
-      ),
-      mintedAt: 0,
-      openSeaURL: '',
-      owner: '',
+      name: metadata.name,
+      audioURL: metadata.animation_url,
     };
   };
 }
-
-export default DeemoContractHelper;
