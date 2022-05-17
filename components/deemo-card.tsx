@@ -36,6 +36,7 @@ const DeemoCard = ({ deemo }: Props) => {
             href={`https://testnets.opensea.io/${deemo.owner}`}
             className="text-secondary text-xs underline"
             target="_blank"
+            rel="noreferrer"
           >
             {abbreviateHash(deemo.owner)}
           </a>
@@ -46,7 +47,7 @@ const DeemoCard = ({ deemo }: Props) => {
       <AudioPlayer audioURL={deemo.audioCID} />
       <hr className="border-t-muted my-6" />
       <footer className="flex justify-end">
-        <a href={deemo.openSeaURL} target="_blank">
+        <a href={deemo.openSeaURL} target="_blank" rel="noreferrer">
           <Button
             Icon={OpenSeaIcon}
             label="OpenSea"

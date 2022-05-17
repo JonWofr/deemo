@@ -127,7 +127,7 @@ const CreateDeemoCard = () => {
       </article>
       {hasBeenMinted && (
         <p className="text-secondary text-center mt-4">
-          Hooray, it's been minted!
+          Hooray, it&apos;s been minted!
           <br /> Head over to{' '}
           <Link href="/deemos">
             <a className="underline uppercase">All Deemos</a>
