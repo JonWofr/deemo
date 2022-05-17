@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Header from '../components/header';
-import { Provider, chain, createClient, defaultChains } from 'wagmi';
+import { Provider, chain, createClient, allChains } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
@@ -10,8 +10,8 @@ import Head from 'next/head';
 
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 
-const chains = defaultChains;
-const defaultChain = chain.mainnet;
+const chains = allChains;
+const defaultChain = chain.polygonMumbai;
 
 // Set up connectors
 const client = createClient({
