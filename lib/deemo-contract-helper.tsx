@@ -41,9 +41,7 @@ export class DeemoContractHelper {
           tokenId: tokenId.toNumber(),
           title: name,
           owner,
-          audioCID: this.ipfsHelper.parseIPFSGatewayURL(
-            this.ipfsHelper.parseCid(audioURL)
-          ),
+          audioCID: audioURL,
           mintedAt: block.timestamp * 1000,
           openSeaURL: `https://testnets.opensea.io/assets/mumbai/0xaf9884b0c98c9dc3f9fd495dd986a78adc61b904/${tokenId}`,
         };
@@ -72,13 +70,29 @@ export class DeemoContractHelper {
     metadataURI: string
   ): Promise<{ name: string; audioURL: string }> => {
     const metadataBlob = await this.ipfsHelper.getFileData(
-      this.ipfsHelper.parseCid(metadataURI)
+      this.ipfsHelper.parseCid(metadataURI),
+      'application/json'
     );
     const metadataJSON = await metadataBlob.text();
     const metadata: NFTMetadata = JSON.parse(metadataJSON);
+    const audioBlob = await this.ipfsHelper.getFileData(
+      this.ipfsHelper.parseCid(metadata.animation_url),
+      'audio/mp3'
+    );
+    const audioDataURL = await this.readAsDataURL(audioBlob);
     return {
       name: metadata.name,
-      audioURL: metadata.animation_url,
+      audioURL: audioDataURL,
     };
   };
+
+  private readAsDataURL = (blob: Blob) =>
+    new Promise<string>((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.addEventListener('error', reject);
+      fileReader.addEventListener('loadend', () =>
+        resolve(fileReader.result as string)
+      );
+      fileReader.readAsDataURL(blob);
+    });
 }

@@ -25,12 +25,12 @@ class IPFSHelper {
     return result;
   };
 
-  public getFileData = async (cid: string) => {
+  public getFileData = async (cid: string, type: string) => {
     const chunks = [];
     for await (const chunk of this.client.cat(cid)) {
       chunks.push(chunk);
     }
-    const fileData = new Blob(chunks);
+    const fileData = new Blob(chunks, { type });
     return fileData;
   };
 

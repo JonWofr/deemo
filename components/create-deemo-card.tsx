@@ -107,7 +107,7 @@ const CreateDeemoCard = () => {
             hidden
             ref={fileInputRef}
             type="file"
-            accept="audio/*"
+            accept="audio/mp3"
             capture
             onChange={(event) => onChangeFileInput(event.target.files)}
           />
