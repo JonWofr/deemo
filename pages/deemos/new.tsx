@@ -57,7 +57,7 @@ const NewDeemo = () => {
         <title>New Deemo</title>
       </Head>
       <Layout>
-        <h1 className="font-bold font-primary text-primary text-3xl mb-6 md:text-5xl text-center">
+        <h1 className="font-bold text-primary text-3xl mb-6 md:text-5xl text-center">
           Create a Deemo
         </h1>
         <p className="text-secondary mb-4 text-center text-xs">

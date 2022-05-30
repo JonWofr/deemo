@@ -42,7 +42,7 @@ const Deemos = () => {
         <title>All Deemos</title>
       </Head>
       <Layout>
-        <h1 className="font-bold font-primary text-primary text-3xl mb-14 md:text-5xl text-center">
+        <h1 className="font-bold text-primary text-3xl mb-14 md:text-5xl text-center">
           All Deemos
         </h1>
         <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] min-h-[300px] relative">
