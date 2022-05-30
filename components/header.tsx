@@ -46,10 +46,12 @@ const Header = () => {
             <Link href="/">
               <a
                 className={classNames(
-                  'uppercase text-secondary tracking-wider py-2 block text-center relative',
+                  'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
+                  'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
-                    'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo':
-                      path === '/',
+                    'before:opacity-100': path === '/',
+                    'text-white': path === '/',
                   }
                 )}
                 onClick={() => setIsExpanded(false)}
@@ -62,10 +64,12 @@ const Header = () => {
             <Link href="/deemos/new">
               <a
                 className={classNames(
-                  'uppercase text-secondary tracking-wider py-2 block text-center relative',
+                  'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
+                  'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
-                    'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo':
-                      path === '/deemos/new',
+                    'before:opacity-100': path === '/deemos/new',
+                    'text-white': path === '/deemos/new',
                   }
                 )}
                 onClick={() => setIsExpanded(false)}
@@ -78,10 +82,12 @@ const Header = () => {
             <Link href="/deemos">
               <a
                 className={classNames(
-                  'uppercase text-secondary tracking-wider py-2 block text-center relative',
+                  'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
+                  'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
-                    'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo':
-                      path === '/deemos',
+                    'before:opacity-100': path === '/deemos',
+                    'text-white': path === '/deemos',
                   }
                 )}
                 onClick={() => setIsExpanded(false)}

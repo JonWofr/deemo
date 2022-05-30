@@ -22,18 +22,21 @@ const Button = ({
 }: Props) => {
   return (
     <button
-      className={classNames('rounded-full border', {
-        'p-2': !label,
-        'px-4 py-2 flex items-center justify-center gap-2': label,
-        'border-transparent  [background-clip:_padding-box,_border-box]':
-          type === ButtonType.ACCENT,
-        'bg-[linear-gradient(#353545,_#353545),_linear-gradient(#FF832B,_#FFC02B)]':
-          backgroundColorType === BackgroundColorType.SECONDARY,
-        'bg-[linear-gradient(#1A1A22,_#1A1A22),_linear-gradient(#FF832B,_#FFC02B)]':
-          backgroundColorType === BackgroundColorType.PRIMARY,
-        'border-primaryText': type === ButtonType.WHITE,
-        'opacity-50': isDisabled,
-      })}
+      className={classNames(
+        'rounded-full border transition-all hover:brightness-[.85]',
+        {
+          'p-2': !label,
+          'px-4 py-2 flex items-center justify-center gap-2': label,
+          'border-transparent  [background-clip:_padding-box,_border-box]':
+            type === ButtonType.ACCENT,
+          'bg-[linear-gradient(90deg,_#353545,_#353545),_linear-gradient(90deg,_#FF832B,_#FFC02B)]':
+            backgroundColorType === BackgroundColorType.SECONDARY,
+          'bg-[linear-gradient(90deg,_#1A1A22,_#1A1A22),_linear-gradient(90deg,_#FF832B,_#FFC02B)]':
+            backgroundColorType === BackgroundColorType.PRIMARY,
+          'border-primaryText': type === ButtonType.WHITE,
+          'opacity-50': isDisabled,
+        }
+      )}
       onClick={onClick}
       disabled={isDisabled}
     >

@@ -29,6 +29,7 @@ module.exports = {
         'spin-slow': 'spin 2s linear infinite',
         dash: 'dash 1.5s ease-in-out infinite',
         color: 'color 1.5s ease-in-out infinite',
+        backgroundMove: 'backgroundMove .5s ease-in-out both',
       },
       keyframes: {
         dash: {
@@ -51,6 +52,14 @@ module.exports = {
           },
           '100%': {
             stroke: '#FFC02B',
+          },
+        },
+        backgroundMove: {
+          '0%': {
+            'background-position': 'left',
+          },
+          '100%': {
+            'background-position': 'right',
           },
         },
       },
