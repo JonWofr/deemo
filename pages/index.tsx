@@ -3,6 +3,8 @@ import Link from 'next/link';
 import RecordIcon from '../assets/icons/record-icon.svg';
 import Button from '../components/button';
 import Head from 'next/head';
+import styles from './index.module.scss';
+import classNames from 'classnames';
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +12,12 @@ const Home: NextPage = () => {
       <Head>
         <title>Deemo</title>
       </Head>
-      <main className="w-screen h-screen flex flex-col justify-center bg-[url('/images/hero-background.svg')] bg-center bg-cover">
+      <main
+        className={classNames(
+          styles.hero,
+          'w-screen h-screen flex flex-col justify-center bg-center bg-cover'
+        )}
+      >
         <div className="container flex flex-col items-center">
           <h1 className="font-bold text-5xl text-primary md:text-7xl text-center mb-4">
             Decentralised
