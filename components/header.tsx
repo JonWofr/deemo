@@ -47,6 +47,7 @@ const Header = () => {
               <a
                 className={classNames(
                   'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
                   'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
                     'before:opacity-100': path === '/',
@@ -64,6 +65,7 @@ const Header = () => {
               <a
                 className={classNames(
                   'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
                   'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
                     'before:opacity-100': path === '/deemos/new',
@@ -81,6 +83,7 @@ const Header = () => {
               <a
                 className={classNames(
                   'uppercase text-secondary tracking-wider py-2 block text-center relative transition-colors',
+                  'hover:text-white',
                   'before:block before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gradient-to-r before:from-accentFrom before:to-accentTo before:opacity-0 before:transition-opacity',
                   {
                     'before:opacity-100': path === '/deemos',
