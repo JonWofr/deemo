@@ -3,7 +3,16 @@ import Button from './button';
 import ConnectIcon from '../assets/icons/connect-icon.svg';
 import { useConnect } from 'wagmi';
 import Connection from '../models/connection';
-import ButtonType from '../enums/button-type';
+import MetaMaskIcon from '../assets/icons/metamask-icon.svg';
+import CoinbaseIcon from '../assets/icons/coinbase-icon.svg';
+import WalletConnectIcon from '../assets/icons/wallet-connect-icon.svg';
+
+const walletIcons: { [key: string]: React.FunctionComponent } = {
+  MetaMask: MetaMaskIcon,
+  'Coinbase Wallet': CoinbaseIcon,
+  WalletConnect: WalletConnectIcon,
+  Injected: ConnectIcon,
+};
 
 const ConnectWalletButtons = () => {
   const [connection, setConnection] = useState<Connection | undefined>(
@@ -29,7 +38,7 @@ const ConnectWalletButtons = () => {
               ? ' (connecting)'
               : ''
           }`}
-          Icon={ConnectIcon}
+          Icon={walletIcons[connector.name] ?? ConnectIcon}
         ></Button>
       ))}
       {connection?.error && (
