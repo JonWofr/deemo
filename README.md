@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deemo
 
-## Getting Started
+With Deemo you can mint audio memos like sounds, vocals, noises as NFTs on the Polygon blockchain.
 
-First, run the development server:
+## Website
+https://deemo.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## The challenge
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deemo was built within a 3-day long weekend challenge. The challenge consisted of building a decentralised application from A-Z with a set of technologies like Next.js, tailwindcss, wagmi etc. that would use the Polygon blockchain within the specified timeframe.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## The result
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+After coming up with the idea and creating a basic design mockup I built a dApp with Next.js that lets you select/record memos. A memo can then be minted on Polygon with the help of the wagmi library. The NFT data is stored on IPFS. All existing Deemos (decentralised memos) are shown and can be listened to on the website.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technologies
 
-## Learn More
+Major technologies that I have used within the project.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js
+- React 
+- tailwindcss
+- ethers.js
+- wagmi
+- IPFS
+- TypeScript
+- HTML5
+- Sass
+- JavaScript
